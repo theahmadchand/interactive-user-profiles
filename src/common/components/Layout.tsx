@@ -1,10 +1,4 @@
-import { ReactNode } from "react";
-
-type LayoutProps = {
-  children: ReactNode;
-};
-
-export const Layout = (props: LayoutProps) => {
+export const Layout: FCC = (props) => {
   const { children } = props;
 
   return (
