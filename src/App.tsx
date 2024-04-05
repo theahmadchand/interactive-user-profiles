@@ -1,11 +1,13 @@
+import { Route, Routes } from "react-router-dom";
+import { Users, UserDetail } from "./pages";
+
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Vite + React</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<Users />} />
+      <Route path="user-detail" element={<UserDetail />} />
+    </Routes>
   );
 }
-
-export default App;
