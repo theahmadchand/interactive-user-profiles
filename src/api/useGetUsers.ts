@@ -1,7 +1,8 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { Gender } from "../common/providers";
 import { Users } from "./apiModels";
 
-const fetchUsers = async (page: number, gender: string) => {
+const fetchUsers = async (page: number, gender: Gender | null) => {
     let url = `https://randomuser.me/api/?results=20`;
 
     if (gender && gender.trim() !== "") url += `&gender=${gender}`;
@@ -15,10 +16,10 @@ const fetchUsers = async (page: number, gender: string) => {
     }
 };
 
-export const useGetUsers = (page: number, gender: string = "") => {
+export const useGetUsers = (pageNumber: number, selectedGender: Gender | null) => {
     const { data, isLoading, isFetching } = useQuery<Users>({
-        queryKey: ["users", { page, gender }],
-        queryFn: () => fetchUsers(page, gender),
+        queryKey: ["users", { pageNumber, selectedGender }],
+        queryFn: () => fetchUsers(pageNumber, selectedGender),
         staleTime: Number.POSITIVE_INFINITY,
         placeholderData: keepPreviousData,
     });

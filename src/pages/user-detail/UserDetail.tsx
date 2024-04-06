@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { useQueryClient } from "@tanstack/react-query";
-import { Link, useParams, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useFilterContext } from "../../common/providers";
 import { Layout } from "../../common/components";
 import { Users } from "../../api";
 
@@ -18,13 +19,13 @@ function formatDate(date: Date | string): string {
 }
 
 export const UserDetail = () => {
-    const navigate = useNavigate();
-    const { userId } = useParams();
-    const [searchParams] = useSearchParams();
-    const page = Number(searchParams.get("page"));
+    const { pageNumber, selectedGender } = useFilterContext();
 
     const queryClient = useQueryClient();
-    const queryData = queryClient.getQueryData<Users>(["users", { page, gender: "" }]);
+    const queryData = queryClient.getQueryData<Users>(["users", { pageNumber, selectedGender }]);
+
+    const navigate = useNavigate();
+    const { userId } = useParams();
 
     const user = queryData?.results.find((item) => item.login.uuid === userId);
 

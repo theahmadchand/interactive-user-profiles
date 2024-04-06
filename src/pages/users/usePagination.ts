@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useFilterContext } from "../../common/providers";
 
 export const usePagination = () => {
-    const [page, setPage] = useState(1);
+    const { pageNumber, setPageNumber } = useFilterContext();
 
-    const previousPage = () => setPage((previous) => previous - 1);
-    const nextPage = () => setPage((previous) => previous + 1);
+    const previousPage = () => setPageNumber((previous) => previous - 1);
+    const nextPage = () => setPageNumber((previous) => previous + 1);
 
     return {
-        page,
+        pageNumber,
         previousPage,
         nextPage,
     };

@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { QueryClientProvider } from "./common/providers";
+import { FilterProvider, QueryClientProvider } from "./common/providers";
 import { Users, UserDetail } from "./pages";
 import "./App.css";
 
@@ -16,7 +16,9 @@ export default function App() {
     return (
         <QueryClientProvider>
             <BrowserRouter>
-                <AppRoutes />
+                <FilterProvider>
+                    <AppRoutes />
+                </FilterProvider>
             </BrowserRouter>
         </QueryClientProvider>
     );

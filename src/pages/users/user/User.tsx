@@ -7,11 +7,10 @@ type UserProps = {
     last: string;
     username: string;
     image: string;
-    page: number;
 };
 
 export const User = (props: UserProps) => {
-    const { userId, first, last, username, image, page } = props;
+    const { userId, first, last, username, image } = props;
     const navigate = useNavigate();
 
     return (
@@ -26,7 +25,7 @@ export const User = (props: UserProps) => {
                 </div>
             </div>
 
-            <Button text="View" size="sm" onClick={() => navigate(`/user/${userId}?page=${page}`)} />
+            <Button text="View" size="sm" onClick={() => navigate(`/user/${userId}`)} />
         </div>
     );
 };

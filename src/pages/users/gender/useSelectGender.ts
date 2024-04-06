@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from "react";
-import { Gender } from "./Gender";
+import { ChangeEvent } from "react";
+import { useFilterContext, Gender } from "../../../common/providers";
 
 export const useSelectGender = () => {
-    const [selectedGender, setSelectedGender] = useState<Gender>("");
+    const { selectedGender, setSelectedGender } = useFilterContext();
 
     const handleGenderChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSelectedGender(event.target.value as Gender);

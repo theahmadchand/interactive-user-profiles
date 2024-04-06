@@ -1,6 +1,7 @@
-export type Gender = "male" | "female" | "";
+import { Gender as GenderType } from "../../../common/providers";
+
 type GenderProps = {
-    selectedGender: Gender;
+    selectedGender: GenderType | null;
     handleGenderChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -17,7 +18,7 @@ export const Gender = (props: GenderProps) => {
                         id="all"
                         value=""
                         className="peer hidden"
-                        checked={selectedGender === ""}
+                        checked={!selectedGender}
                         onChange={handleGenderChange}
                     />
                     <label

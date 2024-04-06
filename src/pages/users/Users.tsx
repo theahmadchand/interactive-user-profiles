@@ -6,10 +6,10 @@ import { Gender, useSelectGender } from "./gender";
 import { Button, Layout } from "../../common/components";
 
 export const Users = () => {
-    const { page, previousPage, nextPage } = usePagination();
+    const { pageNumber, previousPage, nextPage } = usePagination();
     const { selectedGender, handleGenderChange } = useSelectGender();
 
-    const { usersQueryData, isLoading, isFetching } = useGetUsers(page, selectedGender);
+    const { usersQueryData, isLoading, isFetching } = useGetUsers(pageNumber, selectedGender);
     const displayUsers = usersQueryData?.info?.results ? usersQueryData.results : [];
     const totalUser = displayUsers.length;
 
@@ -39,13 +39,16 @@ export const Users = () => {
                                                         last={user.name.last}
                                                         username={user.login.username}
                                                         image={user.picture.thumbnail}
-                                                        page={page}
                                                     />
                                                 </div>
                                             ))}
                                         </div>
                                         <div className="flex flex-grow p-4">
-                                            <Button text="Previous page" onClick={previousPage} disabled={page === 1} />
+                                            <Button
+                                                text="Previous page"
+                                                onClick={previousPage}
+                                                disabled={pageNumber === 1}
+                                            />
                                             <Button text="Next page" onClick={nextPage} />
                                         </div>
                                     </>
