@@ -1,9 +1,9 @@
-import { useGetUsers } from "../../api";
-import { Button, Layout } from "../../common/components";
 import { User } from "./user";
 import { Search } from "./search";
+import { useGetUsers } from "../../api";
 import { usePagination } from "./usePagination";
 import { useSearchUsers } from "./useSearchUsers";
+import { Button, Layout } from "../../common/components";
 
 export const Users = () => {
     const { page, previousPage, nextPage } = usePagination();
@@ -16,8 +16,8 @@ export const Users = () => {
 
     return (
         <Layout>
-            <div className="flex h-full flex-col items-center  gap-4 py-4">
-                <div className="flex w-full flex-col md:w-3/4 lg:w-1/3">
+            <div className="flex h-full flex-col items-center gap-4 p-4">
+                <div className="flex w-full flex-col md:w-3/4 lg:w-2/3 xl:w-1/3">
                     <Search value={searchQuery} onChange={handleSearchInputChange} onClear={clearSearchInput} />
                     <div className="flex w-full flex-none flex-col divide-y rounded-xl border border-gray-300 bg-white shadow-md">
                         {isLoading || isFetching ? (

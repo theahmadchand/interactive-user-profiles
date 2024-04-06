@@ -1,8 +1,9 @@
+import { useEffect } from "react";
+import ReactCountryFlag from "react-country-flag";
+import { useQueryClient } from "@tanstack/react-query";
 import { Link, useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { Layout } from "../../common/components";
-import { useQueryClient } from "@tanstack/react-query";
 import { Users } from "../../api";
-import { useEffect } from "react";
 
 function formatDate(date: Date | string): string {
     if (!(date instanceof Date)) date = new Date(date);
@@ -51,22 +52,36 @@ export const UserDetail = () => {
                             <p className="mb-4 text-2xl font-extrabold text-gray-700">
                                 {user.name.first} {user.name.last}
                             </p>
-                            <p className="flex gap-2">
-                                <span className="font-bold">Email:</span>
-                                <span className="text-gray-500">{user.email}</span>
-                            </p>
-                            <p className="flex gap-2">
-                                <span className="font-bold">Location:</span>
-                                <span className="text-gray-500">{user.email}</span>
-                            </p>
-                            <p className="flex gap-2">
-                                <span className="font-bold">Date of birth:</span>
-                                <span className="text-gray-500">{formatDate(user.dob.date)}</span>
-                            </p>
-                            <p className="flex gap-2">
-                                <span className="font-bold">Phone:</span>
-                                <span className="text-gray-500">{user.phone}</span>
-                            </p>
+                            <div>
+                                <p className="flex gap-2">
+                                    <span className="font-semibold">Email:</span>
+                                    <span className="text-gray-500">{user.email}</span>
+                                </p>
+                                <p className="flex gap-2">
+                                    <span className="font-semibold">Location:</span>
+                                    <span className="text-gray-500">
+                                        {user.location.city}, {user.location.country}
+                                    </span>
+                                </p>
+                                <p className="flex gap-2">
+                                    <span className="font-semibold">Nationality:</span>
+                                    <ReactCountryFlag
+                                        svg
+                                        title={user.nat}
+                                        countryCode={user.nat}
+                                        aria-label={user.nat}
+                                        style={{ fontSize: "1.5em" }}
+                                    />
+                                </p>
+                                <p className="flex gap-2">
+                                    <span className="font-semibold">Date of birth:</span>
+                                    <span className="text-gray-500">{formatDate(user.dob.date)}</span>
+                                </p>
+                                <p className="flex gap-2">
+                                    <span className="font-semibold">Phone:</span>
+                                    <span className="text-gray-500">{user.phone}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
