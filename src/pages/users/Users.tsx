@@ -1,14 +1,15 @@
 import { User } from "./user";
-import { Search } from "./search";
 import { useGetUsers } from "../../api";
 import { usePagination } from "./usePagination";
-import { useSearchUsers } from "./useSearchUsers";
+import { Search, useSearchUsers } from "./search";
+import { Gender, useSelectGender } from "./gender";
 import { Button, Layout } from "../../common/components";
 
 export const Users = () => {
     const { page, previousPage, nextPage } = usePagination();
+    const { selectedGender, handleGenderChange } = useSelectGender();
 
-    const { usersQueryData, isLoading, isFetching } = useGetUsers(page);
+    const { usersQueryData, isLoading, isFetching } = useGetUsers(page, selectedGender);
     const displayUsers = usersQueryData?.info?.results ? usersQueryData.results : [];
     const totalUser = displayUsers.length;
 
@@ -18,7 +19,10 @@ export const Users = () => {
         <Layout>
             <div className="flex h-full flex-col items-center gap-4 p-4">
                 <div className="flex w-full flex-col md:w-3/4 lg:w-2/3 xl:w-1/3">
-                    <Search value={searchQuery} onChange={handleSearchInputChange} onClear={clearSearchInput} />
+                    <div className="flex items-center gap-2">
+                        <Search value={searchQuery} onChange={handleSearchInputChange} onClear={clearSearchInput} />
+                        <Gender selectedGender={selectedGender} handleGenderChange={handleGenderChange} />
+                    </div>
                     <div className="flex w-full flex-none flex-col divide-y rounded-xl border border-gray-300 bg-white shadow-md">
                         {isLoading || isFetching ? (
                             <div className="h-[calc(100vh-13rem)] p-10">Loading...</div>

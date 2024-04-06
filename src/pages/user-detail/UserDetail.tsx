@@ -24,7 +24,7 @@ export const UserDetail = () => {
     const page = Number(searchParams.get("page"));
 
     const queryClient = useQueryClient();
-    const queryData = queryClient.getQueryData<Users>(["users", page]);
+    const queryData = queryClient.getQueryData<Users>(["users", { page, gender: "" }]);
 
     const user = queryData?.results.find((item) => item.login.uuid === userId);
 

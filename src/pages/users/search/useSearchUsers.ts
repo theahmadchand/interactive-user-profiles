@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { Result } from "../../api";
+import { Result } from "../../../api";
 
 export const useSearchUsers = (users: Result[]) => {
     const [searchQuery, setSearchQuery] = useState<string>("");

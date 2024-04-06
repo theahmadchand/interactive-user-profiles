@@ -10,7 +10,7 @@ export const Search = (props: SearchProps) => {
     return (
         <div className="justify-start-start relative flex w-full py-2 md:w-2/3">
             <input
-                className="focus:shadow-outline w-full appearance-none rounded-lg border-2 border-gray-300 px-3 py-2 pl-10 leading-tight text-gray-800 transition-colors hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                className="focus:shadow-outline w-full appearance-none rounded-lg border-2 border-gray-300 p-3 pl-10 leading-tight text-gray-800 transition-colors hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                 type="text"
                 placeholder="Search by name, username..."
                 value={value}
