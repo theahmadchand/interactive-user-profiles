@@ -17,7 +17,7 @@ const fetchUsers = async (page: number, gender: Gender | null) => {
 };
 
 export const useGetUsers = (pageNumber: number, selectedGender: Gender | null) => {
-    const { data, isLoading, isFetching } = useQuery<Users>({
+    const query = useQuery<Users>({
         queryKey: ["users", { pageNumber, selectedGender }],
         queryFn: () => fetchUsers(pageNumber, selectedGender),
         staleTime: Number.POSITIVE_INFINITY,
@@ -25,8 +25,7 @@ export const useGetUsers = (pageNumber: number, selectedGender: Gender | null) =
     });
 
     return {
-        usersQueryData: data,
-        isLoading,
-        isFetching,
+        ...query,
+        usersQueryData: query.data,
     };
 };

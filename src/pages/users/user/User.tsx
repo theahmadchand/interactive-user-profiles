@@ -14,7 +14,7 @@ export const User = (props: UserProps) => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex items-center justify-between space-x-6 p-6">
+        <div className="flex items-center justify-between space-x-6 p-3 shadow">
             <div className="flex items-center space-x-4">
                 <img src={image} className="h-14 w-14 rounded-md" alt="profile_image" />
                 <div className="flex flex-col space-y-2">

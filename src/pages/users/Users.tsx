@@ -1,17 +1,18 @@
 import { User } from "./user";
 import { useGetUsers } from "../../api";
-import { usePagination } from "./usePagination";
 import { Search, useSearchUsers } from "./search";
 import { Gender, useSelectGender } from "./gender";
-import { Button, Layout } from "../../common/components";
+import { Layout } from "../../common/components";
+import { UserSkeleton } from "./UserSkeleton";
+import { PaginationButtons } from "./pagination";
+import { useFilterContext } from "../../common/providers";
 
 export const Users = () => {
-    const { pageNumber, previousPage, nextPage } = usePagination();
+    const { pageNumber } = useFilterContext();
     const { selectedGender, handleGenderChange } = useSelectGender();
 
-    const { usersQueryData, isLoading, isFetching } = useGetUsers(pageNumber, selectedGender);
+    const { usersQueryData, isFetching } = useGetUsers(pageNumber, selectedGender);
     const displayUsers = usersQueryData?.info?.results ? usersQueryData.results : [];
-    const totalUser = displayUsers.length;
 
     const { searchQuery, clearSearchInput, handleSearchInputChange, searchResults } = useSearchUsers(displayUsers);
 
@@ -24,41 +25,21 @@ export const Users = () => {
                         <Gender selectedGender={selectedGender} handleGenderChange={handleGenderChange} />
                     </div>
                     <div className="flex w-full flex-none flex-col divide-y rounded-xl border border-gray-300 bg-white shadow-md">
-                        {isLoading || isFetching ? (
-                            <div className="h-[calc(100dvh-10rem)] md:h-[calc(100dvh-7rem)]">
-                                <p className="p-6">Loading...</p>
-                            </div>
-                        ) : (
-                            <>
-                                {totalUser > 0 ? (
-                                    <>
-                                        <div className="scrollbar h-[calc(100dvh-15rem)] overflow-y-auto md:h-[calc(100dvh-12rem)]">
-                                            {searchResults.map((user) => (
-                                                <div key={user.login.uuid} className="flex flex-col space-y-2 divide-y">
-                                                    <User
-                                                        userId={user.login.uuid}
-                                                        first={user.name.first}
-                                                        last={user.name.last}
-                                                        username={user.login.username}
-                                                        image={user.picture.thumbnail}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-                                        <div className="flex flex-grow p-4">
-                                            <Button
-                                                text="Previous page"
-                                                onClick={previousPage}
-                                                disabled={pageNumber === 1}
-                                            />
-                                            <Button text="Next page" onClick={nextPage} />
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="py-14 text-center">No data available</div>
-                                )}
-                            </>
-                        )}
+                        <div className="scrollbar h-[calc(100dvh-15rem)] overflow-y-auto md:h-[calc(100dvh-12rem)]">
+                            {isFetching && <UserSkeleton />}
+                            {searchResults.map((user) => (
+                                <div key={user.login.uuid} className="flex flex-col space-y-2 divide-y">
+                                    <User
+                                        userId={user.login.uuid}
+                                        first={user.name.first}
+                                        last={user.name.last}
+                                        username={user.login.username}
+                                        image={user.picture.thumbnail}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                        <PaginationButtons isFetching={isFetching} />
                     </div>
                 </div>
             </div>
