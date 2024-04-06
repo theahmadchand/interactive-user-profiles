@@ -1,24 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../common/components";
 
-export const User = () => {
-  const navigate = useNavigate();
+type UserProps = {
+    userId: string;
+    first: string;
+    last: string;
+    username: string;
+    image: string;
+    page: number;
+};
 
-  return (
-    <div className="flex items-center justify-between space-x-6 p-6">
-      <div className="flex items-center space-x-4">
-        <img
-          src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-          className="h-14 w-14 rounded-full"
-          alt=""
-        />
-        <div className="flex flex-col space-y-2">
-          <span>Flyod Miles</span>
-          <span>@flyodmiles</span>
+export const User = (props: UserProps) => {
+    const { userId, first, last, username, image, page } = props;
+    const navigate = useNavigate();
+
+    return (
+        <div className="flex items-center justify-between space-x-6 p-6">
+            <div className="flex items-center space-x-4">
+                <img src={image} className="h-14 w-14 rounded-md" alt="profile_image" />
+                <div className="flex flex-col space-y-2">
+                    <span>
+                        {first} {last}
+                    </span>
+                    <span>{`@${username}`}</span>
+                </div>
+            </div>
+
+            <Button text="View" size="sm" onClick={() => navigate(`/user/${userId}?page=${page}`)} />
         </div>
-      </div>
-
-      <Button text="View" size="sm" onClick={() => navigate("/user-detail")} />
-    </div>
-  );
+    );
 };
