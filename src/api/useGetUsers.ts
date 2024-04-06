@@ -3,7 +3,7 @@ import { Users } from "./apiModels";
 
 const fetchUsers = async (seed: string, page: number) => {
     try {
-        const response = await fetch(`https://randomuser.me/api/?page=${page}&results=5&seed=${seed}`);
+        const response = await fetch(`https://randomuser.me/api/?page=${page}&results=20&seed=${seed}`);
         return await response.json();
     } catch (error) {
         return error;
@@ -24,5 +24,6 @@ export const useGetUsers = (page: number) => {
         usersQueryData: query.data,
         isLoading: query.isLoading,
         refetch: query.refetch,
+        isFetching: query.isFetching,
     };
 };
