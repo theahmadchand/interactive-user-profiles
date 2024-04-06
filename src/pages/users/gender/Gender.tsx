@@ -9,8 +9,8 @@ export const Gender = (props: GenderProps) => {
     const { selectedGender, handleGenderChange } = props;
 
     return (
-        <main className="grid w-72 place-items-center">
-            <div className="grid w-72 grid-cols-3 gap-2 rounded-lg bg-gray-100 p-1 outline outline-2 outline-blue-200">
+        <main className="grid w-full place-items-center md:w-72">
+            <div className="grid w-full grid-cols-3 gap-2 rounded-lg bg-gray-100 p-1 outline outline-2 outline-blue-200 md:w-72">
                 <div>
                     <input
                         type="radio"

@@ -19,18 +19,20 @@ export const Users = () => {
         <Layout>
             <div className="flex h-full flex-col items-center gap-4 p-4">
                 <div className="flex w-full flex-col md:w-3/4 lg:w-2/3 xl:w-1/3">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col items-center pb-2 md:flex-row md:gap-2 md:p-0">
                         <Search value={searchQuery} onChange={handleSearchInputChange} onClear={clearSearchInput} />
                         <Gender selectedGender={selectedGender} handleGenderChange={handleGenderChange} />
                     </div>
                     <div className="flex w-full flex-none flex-col divide-y rounded-xl border border-gray-300 bg-white shadow-md">
                         {isLoading || isFetching ? (
-                            <div className="h-[calc(100vh-13rem)] p-10">Loading...</div>
+                            <div className="h-[calc(100dvh-10rem)] md:h-[calc(100dvh-7rem)]">
+                                <p className="p-6">Loading...</p>
+                            </div>
                         ) : (
                             <>
                                 {totalUser > 0 ? (
                                     <>
-                                        <div className="scrollbar h-[calc(100vh-13rem)] overflow-y-auto">
+                                        <div className="scrollbar h-[calc(100dvh-15rem)] overflow-y-auto md:h-[calc(100dvh-12rem)]">
                                             {searchResults.map((user) => (
                                                 <div key={user.login.uuid} className="flex flex-col space-y-2 divide-y">
                                                     <User
